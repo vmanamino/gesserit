@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: #D4AF37;
+}
+
+
+
+.title > h1 {
+    text-align: center;
+    margin-top: 3%;
+    font-family: Julius Sans One, sans-serif;
+}
+
+.enter {
+    font-family: Unica One;
+    text-align: center;
+    letter-spacing: .1em;
+    font-size: .5em;
+}
+
+/*.duneImage {*/
+    /*background-image: url('../images/sand-dunes.jpg');*/
+/*}*/

@@ -11,12 +11,42 @@ body {
     font-family: Julius Sans One, sans-serif;
 }
 
-.enter {
-    font-family: Unica One;
+.epigram {
+    font-family: Julius Sans One, sans-serif;
     text-align: center;
-    letter-spacing: .1em;
+    letter-spacing: .5em;
     font-size: .5em;
 }
+
+.intro p {
+    margin-top: 2%;
+    text-align: center;
+    font-family: Vollkorn, Archivo Narrow, arial;
+    letter-spacing: .12em;
+    
+}
+
+#code {
+    text-align: center;
+    padding-left: 0;
+}
+
+#code li {
+    display: inline;
+    padding: 0 .5%;
+}
+
+#target {
+    text-align: center;
+}
+
+button {
+    font-family: Julius Sans One;
+    width: 4%;
+    height: 30px;
+    font-weight: bolder;
+}
+
 
 /*.duneImage {*/
     /*background-image: url('../images/sand-dunes.jpg');*/

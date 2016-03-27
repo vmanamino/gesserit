@@ -26,16 +26,25 @@ body {
     
 }
 
-#code, #letters, #gess {
+#code, #letters {
     text-align: center;
     padding-left: 0;
 }
 
 #code li,
-#letters li,
-#gess tr{
+#letters li
+{
     display: inline;
     padding: 0 .5%;
+}
+
+#gess{
+    width: 9%;
+    font-size: x-large;
+}
+
+#code td, #letters td{
+    /*text-align: left;*/
 }
 
 #enter-target {

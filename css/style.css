@@ -58,6 +58,20 @@ button {
     font-weight: bolder;
 }
 
+#myGess button {
+    width: 21px;
+    height: 21px;
+    margin-top: 0px;
+    margin-left: 15px;
+    padding-bottom: 18px;
+    padding-top: 1px;
+    border-bottom-width: 0px;
+}
+
+#myGess input {
+    width: 20px;
+}
+
 
 /*.duneImage {*/
     /*background-image: url('../images/sand-dunes.jpg');*/

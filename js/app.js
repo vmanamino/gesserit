@@ -16,9 +16,11 @@ var word = {
     }
 };
 
+var count = 0;
+
 var numberAt = 1;
 
-var words = ["secret"];
+var words = ["constant"];
 
 $(document).ready(function(){
     var secret = Object.create(word);
@@ -119,7 +121,7 @@ function addRest(quiz){
     console.log(start);
     console.log("number at"+numberAt);
     var end = letters.length - numberAt;
-    console.log(end);
+    console.log("end" + end);
     for (var l = 0; l < 1; l++){
         $("td#letterIn").remove();
         $("<td>" + letters[start] + "</td>").insertAfter("tr#letters>td:nth-child("+start+")");
@@ -129,7 +131,7 @@ function addRest(quiz){
         $("tr#letters>td:nth-child("+(end + 1)+")").remove();
         $("<td>"+letters[end]+"</td>").insertBefore("tr#letters>td:nth-child("+(end + 1)+")");
         $("tr#code>td:nth-child("+(end + 1)+")").remove();
-        $("<td>"+ indices[end] + "</td>").insertBefore("tr#code>td:nth-child("+(end+1)+")");
+        $("<td>"+ indices[end] + "</td>").insertBefore("tr#code>td:nth-child("+(end + 1)+")");
     }
     $("tr#letters>td:nth-child("+(end)+")").remove();
     $("tr#code>td:nth-child("+(end)+")").remove();
@@ -138,26 +140,33 @@ function addRest(quiz){
     innerCircle(end, numberAt, quiz);
 }
 
-function innerCircle(o, numberAt, quiz){
-    var start = numberAt;
-    for (var k = 0; k < o - numberAt; k++) {
-        if (k == 0){
-            $("<td id=\"letterIn\"></td>").insertAfter("tr#letters>td:nth-child("+(start)+")");
-            // $("tr#letters").append("<td id=\"letterIn\"></td>");
-            $("#letterIn").append("<form id=\"myGess\"></form>");
-            $("#myGess").prepend("<input type=\"text\">");
-            $("#myGess").append("<button type=\"button\">X</button>");
-            $("#myGess").on("click", "button", function(){
-                var enput = $("#myGess input").val();
-                checkIn(enput, quiz); 
-            });
-        }
-        else {
-            // $("tr#letters").append("<td>-</td>");
-            $("<td>-</td>").insertAfter("td#letterIn");
+function innerCircle(end, numberCurrent, quiz){
+    // if (count >= 1){
+    //     end = end - 2;
+    // }
+    var start = numberCurrent;
+        for (var k = 0; k < (end - numberCurrent); k++) {
+            if (k == 0){
+                $("<td id=\"letterIn\"></td>").insertAfter("tr#letters>td:nth-child("+(start)+")");
+                // $("tr#letters").append("<td id=\"letterIn\"></td>");
+                $("#letterIn").append("<form id=\"myGess\"></form>");
+                $("#myGess").prepend("<input type=\"text\">");
+                $("#myGess").append("<button type=\"button\">X</button>");
+                $("#myGess").on("click", "button", function(){
+                    var enput = $("#myGess input").val();
+                    checkIn(enput, quiz); 
+                });
+            }
+            else {
+                // $("tr#letters").append("<td>-</td>");
+                // $("tr#letters>td:nth-child("+(o)+")").remove();
+                $("<td>-</td>").insertAfter("td#letterIn");
+                // $("tr#code").append("<td>-</td>");
+            }
             // $("tr#code").append("<td>-</td>");
+            console.log(k);
+            $("<td>-</td>").insertAfter("tr#code>td:nth-child("+(start)+")");
+            
         }
-        // $("tr#code").append("<td>-</td>");
-        $("<td>-</td>").insertAfter("tr#code>td:nth-child("+(start)+")");
-    }
+    count++;
 }

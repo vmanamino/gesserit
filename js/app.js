@@ -20,7 +20,7 @@ var count = 0;
 
 var numberAt = 1;
 
-var words = ["constant"];
+var words = ["embezzling"];
 
 $(document).ready(function(){
     var secret = Object.create(word);
@@ -105,8 +105,13 @@ function checkIn(enPut, quiz){
         if (enPut == letters[numberAt]){
             console.log("correct");
             numberAt++;
-            console.log(numberAt);
-            addRest(quiz);
+            if (numberAt == (letters.length/2)){
+                finishQuiz(quiz)
+            }
+            else {
+                console.log(numberAt);
+                addRest(quiz);
+            }
         }
         else {
             alert("Try again");
@@ -133,11 +138,37 @@ function addRest(quiz){
         $("tr#code>td:nth-child("+(end + 1)+")").remove();
         $("<td>"+ indices[end] + "</td>").insertBefore("tr#code>td:nth-child("+(end + 1)+")");
     }
-    $("tr#letters>td:nth-child("+(end)+")").remove();
-    $("tr#code>td:nth-child("+(end)+")").remove();
-    $("tr#letters>td:nth-child("+(start + 2)+")").remove();
-    $("tr#code>td:nth-child("+(start + 2)+")").remove();
+    // $("tr#letters>td:nth-child("+(end)+")").remove();
+    // $("tr#code>td:nth-child("+(end)+")").remove();
+    // $("tr#letters>td:nth-child("+(start + 2)+")").remove();
+    // $("tr#code>td:nth-child("+(start + 2)+")").remove();
     innerCircle(end, numberAt, quiz);
+}
+
+function finishQuiz(quiz){
+    var letters = quiz.letters();
+    var indices = quiz.indices();
+    var start = numberAt - 1;
+    console.log(start);
+    console.log("number at"+numberAt);
+    var end = letters.length - numberAt;
+    console.log("end" + end);
+    for (var l = 0; l < 1; l++){
+        $("td#letterIn").remove();
+        $("<td>" + letters[start] + "</td>").insertAfter("tr#letters>td:nth-child("+start+")");
+        $("tr#code>td:nth-child("+numberAt+")").remove();
+        $("<td>" + indices[start] + "</td>").insertAfter("tr#code>td:nth-child("+start+")");
+        
+        $("tr#letters>td:nth-child("+(end + 1)+")").remove();
+        $("<td>"+letters[end]+"</td>").insertBefore("tr#letters>td:nth-child("+(end + 1)+")");
+        $("tr#code>td:nth-child("+(end + 1)+")").remove();
+        $("<td>"+ indices[end] + "</td>").insertBefore("tr#code>td:nth-child("+(end + 1)+")");
+    }
+    // $("tr#letters>td:nth-child("+(end)+")").remove();
+    // $("tr#code>td:nth-child("+(end)+")").remove();
+    // $("tr#letters>td:nth-child("+(start + 2)+")").remove();
+    // $("tr#code>td:nth-child("+(start + 2)+")").remove();
+    
 }
 
 function innerCircle(end, numberCurrent, quiz){
@@ -145,6 +176,7 @@ function innerCircle(end, numberCurrent, quiz){
     //     end = end - 2;
     // }
     var start = numberCurrent;
+    if (count == 0){
         for (var k = 0; k < (end - numberCurrent); k++) {
             if (k == 0){
                 $("<td id=\"letterIn\"></td>").insertAfter("tr#letters>td:nth-child("+(start)+")");
@@ -168,5 +200,19 @@ function innerCircle(end, numberCurrent, quiz){
             $("<td>-</td>").insertAfter("tr#code>td:nth-child("+(start)+")");
             
         }
+    }
+    else {
+        $("tr#letters>td:nth-child("+(start + 1)+")").remove();
+        $("<td id=\"letterIn\"></td>").insertAfter("tr#letters>td:nth-child("+(start)+")");
+            // $("tr#letters").append("<td id=\"letterIn\"></td>");
+        $("#letterIn").append("<form id=\"myGess\"></form>");
+        $("#myGess").prepend("<input type=\"text\">");
+        $("#myGess").append("<button type=\"button\">X</button>");
+        $("#myGess").on("click", "button", function(){
+            var enput = $("#myGess input").val();
+            checkIn(enput, quiz); 
+        });
+        
+    }
     count++;
 }

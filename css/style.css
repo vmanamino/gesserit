@@ -72,6 +72,15 @@ button {
     width: 20px;
 }
 
+.next {
+    display: none;
+    text-align: center;
+}
+
+#next button {
+    margin-top: 2%;
+}
+
 
 /*.duneImage {*/
     /*background-image: url('../images/sand-dunes.jpg');*/
